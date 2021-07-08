@@ -1,0 +1,32 @@
+{
+    "name": "abbotton/dcat-sku-plus",
+    "description": "基于Dcat Admin的SKU扩展增强版",
+    "alias": "Dcat Admin SKU扩展增强版",
+    "type": "library",
+    "keywords": ["dcat-admin", "extension"],
+    "homepage": "https://github.com/abbotton/dcat-sku-plus",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abbotton",
+            "email": "uctoo@foxmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "dcat/laravel-admin": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dcat\\Admin\\Extension\\DcatSkuPlus\\": "src/"
+        }
+    },
+    "extra": {
+        "dcat-admin": "Dcat\\Admin\\Extension\\DcatSkuPlus\\DcatSkuPlusServiceProvider",
+        "laravel": {
+            "providers": [
+                "Dcat\\Admin\\Extension\\DcatSkuPlus\\DcatSkuPlusServiceProvider"
+            ]
+        }
+    }
+}
