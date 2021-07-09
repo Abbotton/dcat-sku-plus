@@ -31,7 +31,7 @@
                             <input type="text" class="form-control input_attr_name">
                         </td>
                         <td>
-                            <div class="sku_attr_val_warp">
+                            <div class="sku_attr_val_wrap">
                                 <div class="sku_attr_val_item">
                                     <div class="sku_attr_val_input">
                                         <input type="text" class="form-control">
@@ -52,7 +52,7 @@
             </div>
 
             <!-- 操作SKU -->
-            <div class="sku_edit_warp">
+            <div class="sku_edit_wrap">
                 <table class="table table-bordered">
                     <thead></thead>
                     <tbody></tbody>
@@ -64,16 +64,16 @@
 </div>
 
 <style>
-    .sku_wrap .sku_edit_warp .Js_sku_del_pic {
-        color: {{  Admin::color()->get('cyan') }};
+    .sku_wrap .sku_edit_wrap .Js_sku_del_pic {
+        color: {{ Admin::color()->get('cyan') }};
     }
 
-    .sku_wrap .sku_edit_warp .Js_sku_upload {
+    .sku_wrap .sku_edit_wrap .Js_sku_upload {
         border: 1px solid {{ Admin::color()->get('input-border') }};
         color: {{ Admin::color()->get('dark70') }};
     }
 
-    .sku_wrap .sku_edit_warp tr td .icon-x {
+    .sku_wrap .sku_edit_wrap tr td .icon-x {
         color: {{ Admin::color()->get('danger') }};
     }
 

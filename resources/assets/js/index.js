@@ -1,6 +1,6 @@
 (function () {
-    function SKU(warp) {
-        this.warp = $(warp);
+    function SKU(wrap) {
+        this.wrap = $(wrap);
         this.attrs = {};
         this.skuAttributes = JSON.parse($('.sku_attributes').val());
         this.uploadUrl = $('.upload_url').val();
@@ -15,7 +15,7 @@
     SKU.prototype.init = function () {
         let _this = this;
         // 绑定属性值添加事件
-        _this.warp.find('.sku_attr_key_val').on('click', '.Js_add_attr_val', function () {
+        _this.wrap.find('.sku_attr_key_val').on('click', '.Js_add_attr_val', function () {
             let html = '<div class="sku_attr_val_item">' +
                 '<div class="sku_attr_val_input">' +
                 '<input type="text" class="form-control">' +
@@ -26,13 +26,13 @@
         });
 
         // 绑定属性值移除事件
-        _this.warp.find('.sku_attr_key_val').on('click', '.Js_remove_attr_val', function () {
+        _this.wrap.find('.sku_attr_key_val').on('click', '.Js_remove_attr_val', function () {
             $(this).parent('.sku_attr_val_item').remove();
             _this.getSkuAttr();
         });
 
         // 选择属性触发
-        _this.warp.find('.sku_attr_key_val').on('change', '.attribute_selector', function () {
+        _this.wrap.find('.sku_attr_key_val').on('change', '.attribute_selector', function () {
             if ($(this).val() != 'input') {
                 let skuAttributesArray = _this.skuAttributes;
                 _this.attrIndex = $(this).find("option:selected").data('idx');
@@ -42,27 +42,27 @@
         });
 
         // 绑定添加属性名事件
-        _this.warp.find('.Js_add_attr_name').click(function () {
-            _this.warp.find('.sku_attr_key_val tbody').append(_this.getHtml())
+        _this.wrap.find('.Js_add_attr_name').click(function () {
+            _this.wrap.find('.sku_attr_key_val tbody').append(_this.getHtml())
         });
 
         // 绑定移除属性名事件
-        _this.warp.find('.sku_attr_key_val').on('click', '.Js_remove_attr_name', function () {
+        _this.wrap.find('.sku_attr_key_val').on('click', '.Js_remove_attr_name', function () {
             $(this).closest('tr').remove();
             _this.getSkuAttr()
         });
 
         // 绑定input变化事件
-        _this.warp.find('.sku_attr_key_val tbody').on('change', 'input', _this.getSkuAttr.bind(_this));
-        _this.warp.find('.sku_edit_warp tbody').on('keyup', 'input', _this.processSku.bind(_this));
+        _this.wrap.find('.sku_attr_key_val tbody').on('change', 'input', _this.getSkuAttr.bind(_this));
+        _this.wrap.find('.sku_edit_wrap tbody').on('keyup', 'input', _this.processSku.bind(_this));
 
         // SKU图片上传
-        _this.warp.find('.sku_edit_warp tbody').on('click', '.Js_sku_upload', function () {
+        _this.wrap.find('.sku_edit_wrap tbody').on('click', '.Js_sku_upload', function () {
             _this.upload($(this));
         });
 
         // 删除图片
-        _this.warp.find('.sku_edit_warp tbody').on('click', '.sku_img .icon-x', function () {
+        _this.wrap.find('.sku_edit_wrap tbody').on('click', '.sku_img .icon-x', function () {
             let that = $(this);
             Dcat.confirm('确认要删除图片吗？', null, function () {
                 $.ajax({
@@ -86,22 +86,22 @@
             return false;
         });
 
-        _this.warp.find('.sku_edit_warp tbody').on('mouseenter', '.sku_img img', function () {
+        _this.wrap.find('.sku_edit_wrap tbody').on('mouseenter', '.sku_img img', function () {
             $(this).next('.icon-x').show();
         });
 
-        _this.warp.find('.sku_edit_warp tbody').on('mouseleave', '.sku_img img', function () {
+        _this.wrap.find('.sku_edit_wrap tbody').on('mouseleave', '.sku_img img', function () {
             $(this).next('.icon-x').hide();
         });
 
-        let old_val = _this.warp.find('.Js_sku_input').val();
-        let params = _this.warp.find('.Js_sku_params_input').val();
+        let old_val = _this.wrap.find('.Js_sku_input').val();
+        let params = _this.wrap.find('.Js_sku_params_input').val();
         if (old_val) {
             // 根据值生成DOM
             old_val = JSON.parse(old_val);
             // 处理规格名
             let attr_names = old_val.attrs;
-            let tbody = _this.warp.find('.sku_attr_key_val tbody');
+            let tbody = _this.wrap.find('.sku_attr_key_val tbody');
             let attr_keys = Object.keys(attr_names);
             let attr_keys_len = attr_keys.length;
 
@@ -122,7 +122,7 @@
                         _this.currentSkuId = sku[0].id;
                         let attributeHtml = _this.getAttributeHtml(scopeAttrType, sku[0]);
                         let html = _this.getHtml(attributeHtml);
-                        _this.warp.find('.sku_attr_key_val tbody').append(html);
+                        _this.wrap.find('.sku_attr_key_val tbody').append(html);
                         break;
                     default:
                         tr.find('td:eq(0) input').val(attr_key);
@@ -152,7 +152,7 @@
     SKU.prototype.getSkuAttr = function () {
         let attr = {}; // 所有属性
         let _this = this;
-        let trs = _this.warp.find('.sku_attr_key_val tbody tr');
+        let trs = _this.wrap.find('.sku_attr_key_val tbody tr');
         trs.each(function () {
             let tr = $(this);
             let attr_val = []; // 属性值
@@ -182,7 +182,7 @@
         });
         if (JSON.stringify(_this.attrs) !== JSON.stringify(attr)) {
             _this.attrs = attr;
-            let params = _this.warp.find('.Js_sku_params_input').val();
+            let params = _this.wrap.find('.Js_sku_params_input').val();
             _this.SKUForm(null, JSON.parse(params))
         }
     };
@@ -192,8 +192,8 @@
         let _this = this;
         let attr_names = Object.keys(_this.attrs);
         if (attr_names.length === 0) {
-            _this.warp.find('.sku_edit_warp tbody').html(' ');
-            _this.warp.find('.sku_edit_warp thead').html(' ');
+            _this.wrap.find('.sku_edit_wrap tbody').html(' ');
+            _this.wrap.find('.sku_edit_wrap thead').html(' ');
         } else {
             // 渲染表头
             let thead_html = '<tr>';
@@ -209,7 +209,7 @@
             })
 
             thead_html += '</tr>';
-            _this.warp.find('.sku_edit_warp thead').html(thead_html);
+            _this.wrap.find('.sku_edit_wrap thead').html(thead_html);
 
             // 求笛卡尔积
             let cartesianProductOf = (function () {
@@ -241,11 +241,11 @@
                 })
                 tbody_html += '</tr>'
             });
-            _this.warp.find('.sku_edit_warp tbody').html(tbody_html);
+            _this.wrap.find('.sku_edit_wrap tbody').html(tbody_html);
             if (default_sku) {
                 // 填充数据
                 default_sku.forEach(function (item_sku, index) {
-                    let tr = _this.warp.find('.sku_edit_warp tbody tr').eq(index);
+                    let tr = _this.wrap.find('.sku_edit_wrap tbody tr').eq(index);
                     Object.keys(item_sku).forEach(function (field) {
                         if (field == 'pic' && item_sku[field].length > 0) {
                             let html = '';
@@ -270,8 +270,8 @@
 
     SKU.prototype.setListener = function () {
         let _this = this
-        let ths = _this.warp.find('.sku_edit_warp thead th')
-        let tr = _this.warp.find('.sku_edit_warp tbody tr')
+        let ths = _this.wrap.find('.sku_edit_wrap thead th')
+        let tr = _this.wrap.find('.sku_edit_wrap tbody tr')
         let tds = tr.find('td[data-field]')
 
         ths.each(function () {
@@ -298,11 +298,11 @@
     SKU.prototype.processSku = function () {
         let _this = this;
         let sku_json = {};
-        sku_json.type = _this.warp.find('.sku_attr_select .btn.btn-success').attr('data-type');
+        sku_json.type = _this.wrap.find('.sku_attr_select .btn.btn-success').attr('data-type');
         // 多规格
         sku_json.attrs = _this.attrs;
         let sku = [];
-        _this.warp.find('.sku_edit_warp tbody tr').each(function () {
+        _this.wrap.find('.sku_edit_wrap tbody tr').each(function () {
             let tr = $(this);
             let item_sku = {};
             tr.find('td[data-field]').each(function () {
@@ -327,7 +327,7 @@
             sku.push(item_sku);
         });
         sku_json.sku = sku;
-        _this.warp.find('.Js_sku_input').val(JSON.stringify(sku_json));
+        _this.wrap.find('.Js_sku_input').val(JSON.stringify(sku_json));
     };
 
     // 图片上传
@@ -366,7 +366,7 @@
     SKU.prototype.changeAttrValueHtml = function (e, attrType) {
         let html = this.getAttributeHtml(attrType, this.skuAttr);
         attrType != 'input' ? e.next('input').hide() : e.next('input').show();
-        e.parent().next('td').find('.sku_attr_val_warp').html(html);
+        e.parent().next('td').find('.sku_attr_val_wrap').html(html);
     };
 
     SKU.prototype.getAttributeHtml = function (attrType, attribute) {
@@ -442,7 +442,7 @@
             }
             html += '>' + v.attr_name + '</option>'
         });
-        html += '</select><input type="text" class="form-control input_attr_name"></td><td><div class="sku_attr_val_warp">' +
+        html += '</select><input type="text" class="form-control input_attr_name"></td><td><div class="sku_attr_val_wrap">' +
             (innerHtml.length > 0 ? innerHtml : this.getAttributeHtml('input', this.skuAttr)) +
             '</div></td><td><span class="btn btn-default Js_remove_attr_name">移除</span></td></tr>';
 

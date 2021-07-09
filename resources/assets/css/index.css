@@ -2,11 +2,11 @@
     margin-top: 10px;
 }
 
-.sku_wrap .sku_attr_val_warp {
+.sku_wrap .sku_attr_val_wrap {
     clear: both;
 }
 
-.sku_wrap .sku_attr_val_warp:after {
+.sku_wrap .sku_attr_val_wrap:after {
     content: ' ';
     display: block;
     clear: both;
@@ -29,7 +29,7 @@
     border-radius: 0 !important;
 }
 
-.sku_wrap .sku_edit_warp .Js_sku_upload {
+.sku_wrap .sku_edit_wrap .Js_sku_upload {
     display: inline-block;
     height: 40px;
     width: 40px;
@@ -43,33 +43,33 @@
     margin-top: 1px;
 }
 
-.sku_wrap .sku_edit_warp .Js_sku_del_pic {
+.sku_wrap .sku_edit_wrap .Js_sku_del_pic {
     display: inline-block;
     margin-left: 5px;
     text-decoration: underline;
     cursor: pointer;
 }
 
-.sku_wrap .sku_edit_warp tr th, .sku_wrap .sku_edit_warp .attr-name {
+.sku_wrap .sku_edit_wrap tr th, .sku_wrap .sku_edit_wrap .attr-name {
     line-height: 40px;
 }
 
-.sku_wrap .sku_edit_warp tr th, .sku_wrap .sku_edit_warp tr td {
+.sku_wrap .sku_edit_wrap tr th, .sku_wrap .sku_edit_wrap tr td {
     text-align: center;
     padding-left: .65rem;
 }
 
-.sku_wrap .sku_edit_warp tr td input {
+.sku_wrap .sku_edit_wrap tr td input {
     text-align: center;
     margin-top: 5px;
 }
 
-.sku_wrap .sku_edit_warp tr td .icon-upload-cloud, .sku_wrap .sku_edit_warp tr td .icon-x {
+.sku_wrap .sku_edit_wrap tr td .icon-upload-cloud, .sku_wrap .sku_edit_wrap tr td .icon-x {
     font-size: 18px;
     line-height: 18px;
 }
 
-.sku_wrap .sku_edit_warp tr th input {
+.sku_wrap .sku_edit_wrap tr th input {
     text-align: center;
 }
 
